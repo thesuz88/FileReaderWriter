@@ -1,4 +1,7 @@
-import java.io.*;
+package com.gc.controller;
+
+import com.gc.dao.FileDao;
+
 import java.util.Scanner;
 
 /**
@@ -7,17 +10,18 @@ import java.util.Scanner;
 public class CountriesApp {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        CountriesTextFIle countryFile = new CountriesTextFIle();
+
 
 
         System.out.println("Welcome to the Countries Maintenance Application!");
 
-        countriesAppGenerator(scan, countryFile);
+        countriesAppGenerator(scan);
 
         System.out.println("Happy travels!");
     }
 
-    private static void countriesAppGenerator(Scanner scan, CountriesTextFIle countryFile) {
+    private static void countriesAppGenerator(Scanner scan) {
+        FileDao fileDao = new FileDao();
         int menuNum;
 
         do {
@@ -30,12 +34,12 @@ public class CountriesApp {
 
 
             if (menuNum == 1) {
-                countryFile.readFromFile();
+                fileDao.readCountry();
 
             } else if (menuNum == 2) {
-                //add a country (filewriter)
-                countryFile.writeToFile();
+                fileDao.addCountry();
             }
+
         } while (menuNum != 3);
     }
 
